@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.2 (2024-09-21)
+
 ### 0.0.3 (2024-09-21)
 
 ### [0.0.9](https://github.com/komeilm76/km-generator/compare/v0.0.7...v0.0.9) (2024-09-21)
