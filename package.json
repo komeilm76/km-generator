@@ -12,7 +12,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "start": "node ./module/index.js",
+    "start": "node ./bin/module/index.js",
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
@@ -29,7 +29,7 @@
     "make-release": "npm run fix && npm run build && release-it"
   },
   "bin": {
-    "start": "./module/index.js"
+    "start": "./bin/module/index.js"
   },
   "engines": {
     "node": ">=10"
