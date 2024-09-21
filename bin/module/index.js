@@ -1,0 +1,5 @@
+import lib from './lib';
+const kmGenerateStarter = lib;
+lib.commands.startCli();
+export default kmGenerateStarter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxHQUFHLE1BQU0sT0FBTyxDQUFDO0FBQ3hCLE1BQU0saUJBQWlCLEdBQUcsR0FBRyxDQUFDO0FBQzlCLEdBQUcsQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLENBQUM7QUFDeEIsZUFBZSxpQkFBaUIsQ0FBQyJ9
