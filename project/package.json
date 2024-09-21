@@ -1,0 +1,26 @@
+{
+   "name": "package-starter",
+   "author": {
+      "name": "",
+      "email": "",
+      "url": ""
+   },
+   "version": "1.0.0",
+   "description": "project description",
+   "main": "dist/index.js",
+   "module": "dist/index.js",
+   "types": "dist/index.d.ts",
+   "scripts": {
+      "build": "tsc",
+      "start": "tsc && node dist/index.js",
+      "dev": "npm run dev:ts-node-dev",
+      "dev:nodemon": "nodemon",
+      "dev:ts-node-dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/index.ts"
+   },
+   "files": [
+      "dist"
+   ],
+   "devDependencies": {},
+   "dependencies": {},
+   "categories": []
+}
