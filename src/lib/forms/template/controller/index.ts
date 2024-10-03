@@ -29,6 +29,7 @@ const controller = (result: IResult[]) => {
       repository.readAsync(packageJson, 'json').then((res) => {
         let fileData = res;
         fileData.name = projectName;
+        fileData.description = projectDescription;
         fileData = _.omit(fileData, ['homepage']);
         if (projectRepository) {
           fileData.repository = {
@@ -41,10 +42,7 @@ const controller = (result: IResult[]) => {
       });
 
       let readmeFile = repository.path('README.md');
-      repository.writeAsync(
-        readmeFile,
-        `# ${projectName}\nDescription:${projectDescription}`
-      );
+      repository.writeAsync(readmeFile, `# ${projectName}\nDescription:${projectDescription}`);
 
       let packageLockJson = repository.path('package-lock.json');
       repository.remove(packageLockJson);
@@ -54,6 +52,16 @@ const controller = (result: IResult[]) => {
 
       let changeLogFile = repository.path('CHANGELOG.md');
       repository.remove(changeLogFile);
+
+      let releaseIt = repository.path('.release-it.json');
+      repository.readAsync(releaseIt, 'json').then((res) => {
+        let fileData = res;
+        if (projectTemplate == 'package-template-starter') {
+          fileData.npm.publish = true;
+        } else {
+          fileData.npm.publish = false;
+        }
+      });
     });
 };
 
