@@ -30,6 +30,7 @@ const controller = (result: IResult[]) => {
         let fileData = res;
         fileData.name = projectName;
         fileData.description = projectDescription;
+        fileData.version = '0.0.0';
         fileData = _.omit(fileData, ['homepage']);
         if (projectRepository) {
           fileData.repository = {
