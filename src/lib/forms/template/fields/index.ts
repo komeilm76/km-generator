@@ -16,10 +16,12 @@ const fields = service.form.makeFieldsMap([
         {
           name: 'package-template-starter',
           value: 'package-template-starter',
+          description: 'This Template Maked For Start Create New Npm Package',
         },
         {
           name: 'server-template-starter',
           value: 'server-template-starter',
+          description: 'This Template Maked For Start Create New Server Application',
         },
       ],
       message: 'Please Select Project Template',

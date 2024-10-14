@@ -62,6 +62,7 @@ const controller = (result: IResult[]) => {
         } else {
           fileData.npm.publish = false;
         }
+        repository.writeAsync(releaseIt, fileData);
       });
     });
 };

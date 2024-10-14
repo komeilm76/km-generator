@@ -17,6 +17,7 @@ type IField =
         choices: {
           name: string;
           value: string;
+          description?: string | undefined;
         }[];
         default?: string;
       };
