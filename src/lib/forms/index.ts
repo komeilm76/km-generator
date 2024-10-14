@@ -13,6 +13,7 @@ const mainForm = form.makeForm([
         {
           name: 'Template Form',
           value: 'template',
+          description: 'Select Template For Project You Want Start',
         },
       ],
       message: 'Select Form',
