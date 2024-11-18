@@ -4,7 +4,7 @@ import template from './template';
 
 const forms = {
   template,
-  component
+  component,
 };
 
 const mainForm = form.makeForm([
