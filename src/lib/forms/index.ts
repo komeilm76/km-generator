@@ -1,8 +1,10 @@
 import form, { IResult } from '../service/form';
+import component from './component';
 import template from './template';
 
 const forms = {
   template,
+  component
 };
 
 const mainForm = form.makeForm([
@@ -15,6 +17,11 @@ const mainForm = form.makeForm([
           value: 'template',
           description: 'Select Template For Project You Want Start',
         },
+        {
+          name: 'Component Form',
+          value: 'component',
+          description: 'Select Component Framework',
+        },
       ],
       message: 'Select Form',
     },
@@ -25,6 +32,7 @@ const mainForm = form.makeForm([
 const controller = (result: IResult[]) => {
   let selectedFormName = result[0].value as keyof typeof forms;
   const selectedForm = forms[selectedFormName].form;
+
   selectedForm.start();
 };
 

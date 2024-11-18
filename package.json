@@ -33,9 +33,12 @@
   "dependencies": {
     "@inquirer/prompts": "^6.0.1",
     "@types/node": "^22.5.5",
+    "chalk": "^4.1.2",
+    "chalk-template": "^1.1.0",
     "cross-env": "^7.0.3",
     "fs-jetpack": "^5.1.0",
     "lodash": "^4.17.21",
+    "picocolors": "^1.1.1",
     "rxjs": "^7.8.1",
     "simple-git": "^3.27.0",
     "zod": "^3.23.8"

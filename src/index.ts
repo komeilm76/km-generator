@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
+import _ from 'lodash';
 import lib from './lib';
-const kmGenerateStarter = lib;
+const kmGenerator = lib;
 lib.commands.startCli();
-export default kmGenerateStarter;
+export default kmGenerator;
