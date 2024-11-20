@@ -96,8 +96,8 @@ const fields = service.form.makeFieldsMap([
     key: 'component-macro',
     args: {
       message: 'Add default macros ?! [props,slot,emit,expose]',
-    }
-  }
+    },
+  },
 ]);
 
 export default fields;

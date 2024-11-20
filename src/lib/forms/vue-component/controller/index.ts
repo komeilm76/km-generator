@@ -100,29 +100,30 @@ const controller = (result: IResult[]) => {
     ``,
     `<script setup lang='${componentScriptLanguage == 'typescript' ? 'ts' : 'js'}'>`,
 
-    ...(componentMacro == true ? [
-      `type IMacros = {`,
-      `  props:{`,
-      `   fooProps:string`,
-      `  },`,
-      `  emits:{`,
-      `   fooEvent:[data:string]`,
-      `  },`,
-      `  slots:{`,
-      `   fooSlot(props:{data:string}):any`,
-      `  },`,
-      `  exposes:{`,
-      `   foo:string,`,
-      `   bar:number`,
-      `  }`,
-      `}`,
-      `   `,
-      `const props = defineProps<IMacros['props']>();`,
-      `const emits = defineEmits<IMacros['emits']>();`,
-      `const slots = defineSlots<IMacros['slots']>()`,
-      `defineExpose<IMacros['exposes']>({})`,
-
-    ] : []),
+    ...(componentMacro == true
+      ? [
+          `type IMacros = {`,
+          `  props:{`,
+          `   fooProps:string`,
+          `  },`,
+          `  emits:{`,
+          `   fooEvent:[data:string]`,
+          `  },`,
+          `  slots:{`,
+          `   fooSlot(props:{data:string}):any`,
+          `  },`,
+          `  exposes:{`,
+          `   foo:string,`,
+          `   bar:number`,
+          `  }`,
+          `}`,
+          `   `,
+          `const props = defineProps<IMacros['props']>();`,
+          `const emits = defineEmits<IMacros['emits']>();`,
+          `const slots = defineSlots<IMacros['slots']>()`,
+          `defineExpose<IMacros['exposes']>({})`,
+        ]
+      : []),
 
     `</script>`,
     ``,
@@ -145,8 +146,6 @@ const controller = (result: IResult[]) => {
 
 export default controller;
 
-
-
 `
   type IMacros = {
     props:{
@@ -168,4 +167,4 @@ export default controller;
   const emits = defineEmits<IMacros['emits']>();
   const slots = defineSlots<IMacros['slots']>()
   defineExpose<IMacros['exposes']>({})
-  `
+  `;

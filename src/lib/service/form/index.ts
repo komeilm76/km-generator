@@ -1,38 +1,37 @@
 import { ReplaySubject, Subject } from 'rxjs';
 import { input, select, confirm } from '@inquirer/prompts';
 
-
 type IField =
   | {
-    args: {
-      message: string;
-      default?: string;
-      required: boolean;
-    };
-    action: 'input';
-    key: string;
-  }
+      args: {
+        message: string;
+        default?: string;
+        required: boolean;
+      };
+      action: 'input';
+      key: string;
+    }
   | {
-    args: {
-      message: string;
-      default?: boolean;
-    };
-    action: 'confirm';
-    key: string;
-  }
+      args: {
+        message: string;
+        default?: boolean;
+      };
+      action: 'confirm';
+      key: string;
+    }
   | {
-    args: {
-      message: string;
-      choices: {
-        name: string;
-        value: string;
-        description: string | undefined;
-      }[];
-      default?: string;
+      args: {
+        message: string;
+        choices: {
+          name: string;
+          value: string;
+          description: string | undefined;
+        }[];
+        default?: string;
+      };
+      action: 'select';
+      key: string;
     };
-    action: 'select';
-    key: string;
-  };
 
 export type IResult<KEY extends string = string> = {
   key: KEY;
@@ -48,9 +47,8 @@ const field = (field: IField) => {
       selectedMethod = input;
     } else if (field.action == 'select') {
       selectedMethod = select;
-    }
-    else if (field.action == 'confirm') {
-      selectedMethod = confirm
+    } else if (field.action == 'confirm') {
+      selectedMethod = confirm;
     }
     if (selectedMethod) {
       selectedMethod(field.args as any).then((res: any) => {
