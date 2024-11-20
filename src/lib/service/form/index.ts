@@ -1,44 +1,56 @@
 import { ReplaySubject, Subject } from 'rxjs';
-import { input, select } from '@inquirer/prompts';
+import { input, select, confirm } from '@inquirer/prompts';
+
 
 type IField =
   | {
-      args: {
-        message: string;
-        default?: string;
-        required: boolean;
-      };
-      action: 'input';
-      key: string;
-    }
-  | {
-      args: {
-        message: string;
-        choices: {
-          name: string;
-          value: string;
-          description: string | undefined;
-        }[];
-        default?: string;
-      };
-      action: 'select';
-      key: string;
+    args: {
+      message: string;
+      default?: string;
+      required: boolean;
     };
+    action: 'input';
+    key: string;
+  }
+  | {
+    args: {
+      message: string;
+      default?: boolean;
+    };
+    action: 'confirm';
+    key: string;
+  }
+  | {
+    args: {
+      message: string;
+      choices: {
+        name: string;
+        value: string;
+        description: string | undefined;
+      }[];
+      default?: string;
+    };
+    action: 'select';
+    key: string;
+  };
 
 export type IResult<KEY extends string = string> = {
   key: KEY;
-  value: string;
+  value: string | boolean | number;
 };
 
 const field = (field: IField) => {
   let result = new Subject<IResult<IField['key']>>();
   let call = new Subject<void>();
   call.subscribe((observer) => {
-    let selectedMethod: typeof select | typeof input | undefined = undefined;
+    let selectedMethod: typeof select | typeof input | typeof confirm | undefined = undefined;
     if (field.action == 'input') {
       selectedMethod = input;
     } else if (field.action == 'select') {
       selectedMethod = select;
+    }
+    else if (field.action == 'confirm') {
+      selectedMethod = confirm
     }
     if (selectedMethod) {
       selectedMethod(field.args as any).then((res: any) => {

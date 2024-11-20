@@ -63,28 +63,34 @@ const makeFileName = (
 };
 
 const controller = (result: IResult[]) => {
+  console.log('result', result);
+
   let componentName = result.find((item) => {
     return item.key == 'component-name';
   })?.value as string;
 
   let componentPrefix = result.find((item) => {
     return item.key == 'component-prefix';
-  })?.value;
+  })?.value as string;
 
   let componentSuffix = result.find((item) => {
     return item.key == 'component-suffix';
-  })?.value;
+  })?.value as string;
 
   let componentScriptLanguage = result.find((item) => {
     return item.key == 'component-script-language';
-  })?.value;
+  })?.value as string;
 
   let componentStyleLanguage = result.find((item) => {
     return item.key == 'component-style-language';
-  })?.value;
+  })?.value as string;
   let componentDesign = result.find((item) => {
     return item.key == 'component-design';
-  })?.value;
+  })?.value as string;
+
+  let componentMacro = result.find((item) => {
+    return item.key == 'component-macro';
+  })?.value as boolean;
 
   let fileName = makeFileName(componentName, componentPrefix, componentSuffix, 'vue', '.');
   let fileData = [
@@ -92,7 +98,33 @@ const controller = (result: IResult[]) => {
     ` <div class='${fileName.kebabName}'> ${fileName.name} </div>`,
     `</template>`,
     ``,
-    `<script setup lang='${componentScriptLanguage == 'typescript' ? 'ts' : 'js'}'></script>`,
+    `<script setup lang='${componentScriptLanguage == 'typescript' ? 'ts' : 'js'}'>`,
+
+    ...(componentMacro == true ? [
+      `type IMacros = {`,
+      `  props:{`,
+      `   fooProps:string`,
+      `  },`,
+      `  emits:{`,
+      `   fooEvent:[data:string]`,
+      `  },`,
+      `  slots:{`,
+      `   fooSlot(props:{data:string}):any`,
+      `  },`,
+      `  exposes:{`,
+      `   foo:string,`,
+      `   bar:number`,
+      `  }`,
+      `}`,
+      `   `,
+      `const props = defineProps<IMacros['props']>();`,
+      `const emits = defineEmits<IMacros['emits']>();`,
+      `const slots = defineSlots<IMacros['slots']>()`,
+      `defineExpose<IMacros['exposes']>({})`,
+
+    ] : []),
+
+    `</script>`,
     ``,
     `<style scoped lang='${componentStyleLanguage == 'scss' ? 'scss' : 'css'}'>`,
     ` .${fileName.kebabName} {`,
@@ -112,3 +144,28 @@ const controller = (result: IResult[]) => {
 };
 
 export default controller;
+
+
+
+`
+  type IMacros = {
+    props:{
+      fooProps:string
+    },
+    emits:{
+      fooEvent:[data:string]
+    },
+    slots:{
+      fooSlot(props:{data:string}):any
+    },
+    exposes:{
+      foo:string,
+      bar:number
+    }
+  }
+  
+  const props = defineProps<IMacros['props']>();
+  const emits = defineEmits<IMacros['emits']>();
+  const slots = defineSlots<IMacros['slots']>()
+  defineExpose<IMacros['exposes']>({})
+  `
