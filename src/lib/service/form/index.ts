@@ -66,7 +66,7 @@ const makeFieldsMap = <FIELD extends IField>(fields: FIELD[]) => {
   return fields;
 };
 
-const makeForm = <FIELD extends IField>(fields: FIELD[]) => {
+const makeForm = <FIELD extends IField>(path: string, fields: FIELD[]) => {
   const step = new Subject<number>();
   const formValuesUntilThisStep = new ReplaySubject<IResult>(fields.length);
   const completedFields = new Subject<void>();
@@ -95,6 +95,7 @@ const makeForm = <FIELD extends IField>(fields: FIELD[]) => {
   });
 
   return {
+    path,
     start: () => {
       step.next(0);
       let values: IResult[] = [];

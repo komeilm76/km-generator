@@ -1,7 +1,9 @@
 import commands from './commands';
-import example from './example';
+import forms from './forms';
+import service from './service';
 
 export default {
-  example,
   commands,
+  forms,
+  service,
 };

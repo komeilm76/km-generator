@@ -3,5 +3,5 @@
 import _ from 'lodash';
 import lib from './lib';
 const kmGenerator = lib;
-lib.commands.startCli();
+lib.commands.runApplication();
 export default kmGenerator;

@@ -1,5 +1,7 @@
-import forms from '../forms';
+import start from '../start';
 
 export default {
-  startCli: forms.mainForm.start,
+  runApplication: () => {
+    return start.form.start();
+  },
 };
