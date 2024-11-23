@@ -7,5 +7,5 @@ export default {
   createComponent,
   createTemplate,
   createComponentVue,
-  createGenerator
+  createGenerator,
 };

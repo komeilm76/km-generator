@@ -3,7 +3,7 @@ import node from './node';
 import path from './path';
 
 export default {
-    form,
-    node,
-    path
+  form,
+  node,
+  path,
 };

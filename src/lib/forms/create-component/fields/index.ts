@@ -1,10 +1,6 @@
 import chalk from 'chalk';
 import service from '../../../service';
 
-
-
-
-
 const fields = service.form.makeFieldsMap([
   {
     action: 'select',

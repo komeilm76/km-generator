@@ -3,9 +3,6 @@ import { IResult } from '../../../service/form';
 import _ from 'lodash';
 import service from '../../../service';
 
-
-
-
 const controller = (result: IResult[]) => {
   console.log('result', result);
 
@@ -36,7 +33,13 @@ const controller = (result: IResult[]) => {
     return item.key == 'component-macro';
   })?.value as boolean;
 
-  let fileName = service.path.makeFileName(componentName, componentPrefix, componentSuffix, 'vue', '.');
+  let fileName = service.path.makeFileName(
+    componentName,
+    componentPrefix,
+    componentSuffix,
+    'vue',
+    '.'
+  );
   let fileData = [
     `<template>`,
     ` <div class='${fileName.kebabName}'> ${fileName.name} </div>`,
@@ -46,27 +49,27 @@ const controller = (result: IResult[]) => {
 
     ...(componentMacro == true
       ? [
-        `type IMacros = {`,
-        `  props:{`,
-        `   fooProps:string`,
-        `  },`,
-        `  emits:{`,
-        `   fooEvent:[data:string]`,
-        `  },`,
-        `  slots:{`,
-        `   fooSlot(props:{data:string}):any`,
-        `  },`,
-        `  exposes:{`,
-        `   foo:string,`,
-        `   bar:number`,
-        `  }`,
-        `}`,
-        `   `,
-        `const props = defineProps<IMacros['props']>();`,
-        `const emits = defineEmits<IMacros['emits']>();`,
-        `const slots = defineSlots<IMacros['slots']>()`,
-        `defineExpose<IMacros['exposes']>({})`,
-      ]
+          `type IMacros = {`,
+          `  props:{`,
+          `   fooProps:string`,
+          `  },`,
+          `  emits:{`,
+          `   fooEvent:[data:string]`,
+          `  },`,
+          `  slots:{`,
+          `   fooSlot(props:{data:string}):any`,
+          `  },`,
+          `  exposes:{`,
+          `   foo:string,`,
+          `   bar:number`,
+          `  }`,
+          `}`,
+          `   `,
+          `const props = defineProps<IMacros['props']>();`,
+          `const emits = defineEmits<IMacros['emits']>();`,
+          `const slots = defineSlots<IMacros['slots']>()`,
+          `defineExpose<IMacros['exposes']>({})`,
+        ]
       : []),
 
     `</script>`,
@@ -89,4 +92,3 @@ const controller = (result: IResult[]) => {
 };
 
 export default controller;
-
