@@ -23,7 +23,7 @@ const makeFileName = (
   suffix: string | undefined,
   format: string,
   joinSymbol: string,
-  fileCase: keyof ReturnType<typeof kmCase.cases>
+  fileCase: keyof ReturnType<typeof kmCase.cases> = 'pascal'
 ) => {
   let { name, location } = parsePath(path);
 

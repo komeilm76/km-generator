@@ -6,7 +6,7 @@ const controller = (result: IResult[]) => {
   console.log('result', result);
 
   let generateFormValue = result.find((item) => {
-    return item.key == 'generate-form';
+    return item.key == 'create-form';
   });
 
   if (generateFormValue) {

@@ -7,29 +7,29 @@ const fields = service.form.makeFieldsMap([
     args: {
       choices: [
         {
-          name: chalk.hex('#83c255')('New Component'),
-          value: 'new-component',
-          description: 'Generate New Component',
+          name: chalk.hex('#390099').bold('🧩 Create Component'),
+          value: 'create-component',
+          description: 'Create New Component',
         },
         {
-          name: chalk.hex('#ffc131')('New Service'),
-          value: 'new-service',
-          description: 'Generate New Service',
+          name: chalk.hex('#9E0059').bold('🌐 Create Service'),
+          value: 'create-service',
+          description: 'Create New Service',
         },
         {
-          name: chalk.hex('#ff5754')('New Starter Template'),
-          value: 'new-template',
-          description: 'Generate New Starter Template',
+          name: chalk.hex('#FF0054').bold('🏠 Create Starter Template'),
+          value: 'create-template',
+          description: 'Create New Starter Template',
         },
         {
-          name: chalk.hex('#e76c8f')('⚙️  New Generator'),
-          value: 'new-generator',
+          name: chalk.hex('#FF5400').bold('⚙️  Create Generator'),
+          value: 'create-generator',
           description: 'Create New Generator',
         },
       ],
-      message: 'What do You Want ?',
+      message: 'What do You Want to Create?',
     },
-    key: 'generate-form',
+    key: 'create-form',
   },
 ]);
 

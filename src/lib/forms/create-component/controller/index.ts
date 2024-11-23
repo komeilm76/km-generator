@@ -1,12 +1,12 @@
 import { IResult } from '../../../service/form';
 import _ from 'lodash';
-import vueComponent from '../../vue-component';
+import createComponentVue from '../../create-component-vue';
 const controller = (result: IResult[]) => {
   let componentMode = result.find((item) => {
     return item.key == 'component-mode';
   })?.value;
-  if (componentMode == 'vue-component') {
-    vueComponent.form.start();
+  if (componentMode == 'create-component-vue') {
+    createComponentVue.form.start();
   }
 };
 

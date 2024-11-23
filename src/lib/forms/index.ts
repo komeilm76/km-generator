@@ -1,9 +1,11 @@
-import newTemplate from './new.template';
-import newComponent from './new.component';
-import vueComponent from './vue-component';
+import createComponentVue from './create-component-vue';
+import createComponent from './create-component';
+import createTemplate from './create-template';
+import createGenerator from './create-generator';
 
 export default {
-  newComponent,
-  newTemplate,
-  vueComponent,
+  createComponent,
+  createTemplate,
+  createComponentVue,
+  createGenerator
 };

@@ -3,35 +3,35 @@ import { input, select, confirm } from '@inquirer/prompts';
 
 type IField =
   | {
-      args: {
-        message: string;
-        default?: string;
-        required: boolean;
-      };
-      action: 'input';
-      key: string;
-    }
-  | {
-      args: {
-        message: string;
-        default?: boolean;
-      };
-      action: 'confirm';
-      key: string;
-    }
-  | {
-      args: {
-        message: string;
-        choices: {
-          name: string;
-          value: string;
-          description: string | undefined;
-        }[];
-        default?: string;
-      };
-      action: 'select';
-      key: string;
+    args: {
+      message: string;
+      default?: string;
+      required: boolean;
     };
+    action: 'input';
+    key: string;
+  }
+  | {
+    args: {
+      message: string;
+      default?: boolean;
+    };
+    action: 'confirm';
+    key: string;
+  }
+  | {
+    args: {
+      message: string;
+      choices: {
+        name: string;
+        value: string;
+        description: string | undefined;
+      }[];
+      default?: string;
+    };
+    action: 'select';
+    key: string;
+  };
 
 export type IResult<KEY extends string = string> = {
   key: KEY;
