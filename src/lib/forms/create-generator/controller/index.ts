@@ -22,14 +22,28 @@ const controller = (result: IResult[]) => {
 
   console.log('fileName', fileName);
 
-  let callLocation = jetpack.cwd(`./.km-generator/${fileName.path}`);
+  let callLocation = jetpack.cwd(`./src/.km-generator/${fileName.path}`);
   let controllerPath = callLocation.path('controller/index.ts');
   let fieldsPath = callLocation.path('fields/index.ts');
   let indexPath = callLocation.path('index.ts');
 
   callLocation.writeAsync(controllerPath, 'controller');
   callLocation.writeAsync(fieldsPath, 'fields');
-  callLocation.writeAsync(indexPath, 'index');
+  let indexTemplate = [
+    `    import service from '../../service';`,
+    `    import controller from './controller';`,
+    `    import fields from './fields';`,
+
+    `    const form = service.form.makeForm('create-template', fields);`,
+
+    `    form.finish.subscribe((observer) => {`,
+    `      controller(observer);`,
+    `    });`,
+    `    export default {`,
+    `      form,`,
+    `    };`,
+  ]
+  callLocation.writeAsync(indexPath, indexTemplate.join('\t\n'));
 };
 
 export default controller;
