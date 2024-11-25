@@ -42,7 +42,7 @@ const controller = (result: IResult[]) => {
     `    export default {`,
     `      form,`,
     `    };`,
-  ]
+  ];
   callLocation.writeAsync(indexPath, indexTemplate.join('\t\n'));
 };
 
