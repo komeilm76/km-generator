@@ -1,7 +1,7 @@
 import { ReplaySubject, Subject } from 'rxjs';
 import { input, select, confirm } from '@inquirer/prompts';
 
-type IField =
+export type IField =
   | {
       args: {
         message: string;

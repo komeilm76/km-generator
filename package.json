@@ -38,6 +38,7 @@
     "cross-env": "^7.0.3",
     "fs-jetpack": "^5.1.0",
     "km-case": "^0.0.4",
+    "km-generator": "^0.0.27",
     "lodash": "^4.17.21",
     "picocolors": "^1.1.1",
     "rxjs": "^7.8.1",
