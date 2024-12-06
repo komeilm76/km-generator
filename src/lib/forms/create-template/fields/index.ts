@@ -14,14 +14,19 @@ const fields = service.form.makeFieldsMap([
     args: {
       choices: [
         {
-          name: 'package-template-starter',
+          name: 'Template Starter For: ( packages )',
           value: 'package-template-starter',
           description: 'This Template Maked For Start Create New Npm Package',
         },
         {
-          name: 'server-template-starter',
+          name: 'Template Starter For: ( Server )',
           value: 'server-template-starter',
           description: 'This Template Maked For Start Create New Server Application',
+        },
+        {
+          name: 'Template Starter For: ( App Core )',
+          value: 'app-core-starter',
+          description: 'This Package Suitable For Use In Applications As Core',
         },
       ],
       message: 'Please Select Project Template',

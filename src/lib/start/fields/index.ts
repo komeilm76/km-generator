@@ -26,6 +26,11 @@ const fields = service.form.makeFieldsMap([
           value: 'create-generator',
           description: 'Create New Generator',
         },
+        {
+          name: chalk.hex('#FF5400').bold('📁 Custom Forms'),
+          value: 'custom forms',
+          description: 'use costom forms in km-generator',
+        },
       ],
       message: 'What do You Want to Create?',
     },
