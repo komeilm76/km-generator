@@ -43,7 +43,7 @@ const field = (field: IField) => {
   let call = new Subject<void>();
   call.subscribe((observer) => {
     let selectedMethod: typeof select | typeof input | typeof confirm | undefined = undefined;
-    
+
     if (field.action == 'input') {
       selectedMethod = input;
     } else if (field.action == 'select') {
