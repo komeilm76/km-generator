@@ -1,10 +1,37 @@
 import { ReplaySubject, Subject } from 'rxjs';
 import { input, select, confirm } from '@inquirer/prompts';
-import fields from './fields';
-import { z } from 'zod';
-import schemas from './schemas';
 
-export type IField = z.infer<typeof schemas>;
+export type IField =
+  | {
+      args: {
+        message: string;
+        default?: string;
+        required: boolean;
+      };
+      action: 'input';
+      key: string;
+    }
+  | {
+      args: {
+        message: string;
+        default?: boolean;
+      };
+      action: 'confirm';
+      key: string;
+    }
+  | {
+      args: {
+        message: string;
+        choices: {
+          name: string;
+          value: string;
+          description: string | undefined;
+        }[];
+        default?: string;
+      };
+      action: 'select';
+      key: string;
+    };
 
 export type IResult<KEY extends string = string> = {
   key: KEY;
@@ -16,8 +43,14 @@ const field = (field: IField) => {
   let call = new Subject<void>();
   call.subscribe((observer) => {
     let selectedMethod: typeof select | typeof input | typeof confirm | undefined = undefined;
-    selectedMethod = fields[field.action as keyof typeof fields].method;
-
+    
+    if (field.action == 'input') {
+      selectedMethod = input;
+    } else if (field.action == 'select') {
+      selectedMethod = select;
+    } else if (field.action == 'confirm') {
+      selectedMethod = confirm;
+    }
     if (selectedMethod) {
       selectedMethod(field.args as any).then((res: any) => {
         result.next({ key: field.key, value: res });

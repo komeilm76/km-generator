@@ -2,6 +2,7 @@ import jetpack from 'fs-jetpack';
 import { IResult } from '../../../service/form';
 import _ from 'lodash';
 import service from '../../../service';
+import content from './content';
 
 const controller = (result: IResult[]) => {
   console.log('result', result);
@@ -40,55 +41,50 @@ const controller = (result: IResult[]) => {
     'vue',
     '.'
   );
-  let fileData = [
-    `<template>`,
-    ` <div class='${fileName.kebabName}'> ${fileName.name} </div>`,
-    `</template>`,
-    ``,
-    `<script setup lang='${componentScriptLanguage == 'typescript' ? 'ts' : 'js'}'>`,
 
-    ...(componentMacro == true
-      ? [
-          `type IMacros = {`,
-          `  props:{`,
-          `   fooProps:string`,
-          `  },`,
-          `  emits:{`,
-          `   fooEvent:[data:string]`,
-          `  },`,
-          `  slots:{`,
-          `   fooSlot(props:{data:string}):any`,
-          `  },`,
-          `  exposes:{`,
-          `   foo:string,`,
-          `   bar:number`,
-          `  }`,
-          `}`,
-          `   `,
-          `const props = defineProps<IMacros['props']>();`,
-          `const emits = defineEmits<IMacros['emits']>();`,
-          `const slots = defineSlots<IMacros['slots']>()`,
-          `defineExpose<IMacros['exposes']>({})`,
-        ]
-      : []),
+  console.log('fileName', fileName);
 
-    `</script>`,
-    ``,
-    `<style scoped lang='${componentStyleLanguage == 'scss' ? 'scss' : 'css'}'>`,
-    ` .${fileName.kebabName} {`,
-    ` }`,
-    `</style>`,
-  ];
-  let fileDataAsString = fileData.join('\t\n');
-  console.log(fileData);
-  console.log(fileDataAsString);
-  let callLocation = jetpack.cwd(`./`);
+  const componentFile = {
+    content: [
+      ...content.addTemplateInComponentFile(fileName.kebabName, [`  ${fileName.name}`]),
+      ...content.addScriptToComponentFile(componentScriptLanguage, [
+        ...(componentMacro == true
+          ? content.addMacrosInComponentFile(fileName.justName, componentDesign)
+          : []),
+      ]),
+      ...content.addStyleToComponentFile(componentStyleLanguage, fileName.kebabName),
+    ],
+    fileFullName:
+      componentDesign == 'file'
+        ? fileName.fullpath
+        : `${fileName.path}/Component.${fileName.format}`,
+    mode: 'both',
+  };
+  const typescriptFile = {
+    content: [
+      ...(componentMacro == true
+        ? content.addMacrosInTypeScriptFile(fileName.justName, componentDesign)
+        : []),
+    ],
+    fileFullName: `${fileName.path}/types.ts`,
+    mode: 'folder',
+  };
+  const indexFile = {
+    content: [...content.indexFileContent],
+    fileFullName: `${fileName.path}/index.ts`,
+    mode: 'folder',
+  };
 
-  if (componentDesign == 'file') {
-    callLocation.writeAsync(fileName.fullpath, fileDataAsString);
-  } else {
-    callLocation.writeAsync(`${fileName.path}/index.${fileName.format}`, fileDataAsString);
-  }
+  [componentFile, typescriptFile, indexFile].forEach((item) => {
+    let content = item.content.join('\t\n');
+    let callLocation = jetpack.cwd(`./`);
+    if (item.mode == 'both') {
+      callLocation.writeAsync(item.fileFullName, content);
+    }
+    if (item.mode == componentDesign) {
+      callLocation.writeAsync(item.fileFullName, content);
+    }
+  });
 };
 
 export default controller;

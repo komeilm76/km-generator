@@ -11,24 +11,24 @@ const fields = service.form.makeFieldsMap([
     },
     key: 'component-name',
   },
-  {
-    action: 'input',
-    args: {
-      message: 'Set A Prefix For Vue Component',
-      default: '',
-      required: false,
-    },
-    key: 'component-prefix',
-  },
-  {
-    action: 'input',
-    args: {
-      message: 'Set A Suffix For Vue Component',
-      default: '',
-      required: false,
-    },
-    key: 'component-suffix',
-  },
+  // {
+  //   action: 'input',
+  //   args: {
+  //     message: 'Set A Prefix For Vue Component',
+  //     default: '',
+  //     required: false,
+  //   },
+  //   key: 'component-prefix',
+  // },
+  // {
+  //   action: 'input',
+  //   args: {
+  //     message: 'Set A Suffix For Vue Component',
+  //     default: '',
+  //     required: false,
+  //   },
+  //   key: 'component-suffix',
+  // },
 
   {
     action: 'select',
@@ -55,16 +55,16 @@ const fields = service.form.makeFieldsMap([
     action: 'select',
     args: {
       message: 'Select Script Language',
-      default: 'typescript',
+      default: 'ts',
       choices: [
         {
           name: chalk.hex('#0376c6')('Typescript'),
-          value: 'typescript',
+          value: 'ts',
           description: 'Javascript Compiler Language',
         },
         {
           name: chalk.hex('#f7e025')('Javascript'),
-          value: 'javascript',
+          value: 'js',
           description: 'Javascript Language',
         },
       ],

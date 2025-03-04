@@ -52,6 +52,7 @@ const makeFileName = (
   let truePath = _.join([location, fileName], '/');
   let truefullPath = _.join([location, fullFileName], '/');
   return {
+    justName:name,
     name: fileName,
     fullName: fullFileName,
     format,
