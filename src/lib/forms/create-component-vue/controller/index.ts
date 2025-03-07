@@ -42,8 +42,6 @@ const controller = (result: IResult[]) => {
     '.'
   );
 
-  console.log('fileName', fileName);
-
   const componentFile = {
     content: [
       ...content.addTemplateInComponentFile(fileName.kebabName, [`  ${fileName.name}`]),
@@ -66,11 +64,11 @@ const controller = (result: IResult[]) => {
         ? content.addMacrosInTypeScriptFile(fileName.justName, componentDesign)
         : []),
     ],
-    fileFullName: `${fileName.path}/types.ts`,
+    fileFullName: `${fileName.path}/script.ts`,
     mode: 'folder',
   };
   const indexFile = {
-    content: [...content.indexFileContent],
+    content: [...content.indexFileContent(fileName.justName)],
     fileFullName: `${fileName.path}/index.ts`,
     mode: 'folder',
   };

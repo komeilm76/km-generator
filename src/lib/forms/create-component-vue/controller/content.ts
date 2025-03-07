@@ -35,8 +35,9 @@ const macrosTypeInTypeScriptFile = (componentName: string) => {
     `   text:string,`,
     `  }`,
     ` }`,
-    `}`,
     ...space(),
+    ' export const service = () => {}',
+    `}`,
   ];
   return output;
 };
@@ -51,7 +52,8 @@ const macrosDefines = [
 ];
 const macrosImport = (componentName: string) => {
   let output = [
-    `import type { ${componentName} } from "./types"`,
+    `import { ${componentName} } from "./script"`,
+    ...space(),
     `type IMacros = ${componentName}.IMacros;`,
     ...space(),
   ];
@@ -105,7 +107,16 @@ const addStyleToComponentFile = <LANG extends string>(
   return output;
 };
 
-const indexFileContent = [`import Cm from "./Component.vue"`, `export default {`, ` Cm,`, `}`];
+const indexFileContent = (componentName: string) => {
+  return [
+    `import Cm from "./Component.vue"`,
+    `import { ${componentName} } from './script'`,
+    `export default {`,
+    ` Cm,`,
+    ` ...${componentName},`,
+    `}`,
+  ];
+};
 
 export default {
   macrosTypeInComponent,
