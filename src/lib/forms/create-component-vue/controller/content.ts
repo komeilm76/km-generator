@@ -41,15 +41,20 @@ const macrosTypeInTypeScriptFile = (componentName: string) => {
   ];
   return output;
 };
-const macrosDefines = [
-  `const props = defineProps<IMacros['props']>();`,
-  `const emits = defineEmits<IMacros['emits']>();`,
-  `const slots = defineSlots<IMacros['slots']>()`,
-  `defineExpose<IMacros['exposes']>({`,
-  ` text:props.text`,
-  `})`,
-  ...space(),
-];
+const macrosDefines = (componentName: string) => {
+  return [
+    `const props = defineProps<IMacros['props']>();`,
+    `const emits = defineEmits<IMacros['emits']>();`,
+    `const slots = defineSlots<IMacros['slots']>()`,
+    `defineExpose<IMacros['exposes']>({`,
+    ` text:props.text`,
+    `})`,
+    `defineOptions({`,
+    ` name:'${componentName}'`,
+    `})`,
+    ...space(),
+  ];
+};
 const macrosImport = (componentName: string) => {
   let output = [
     `import { ${componentName} } from "./script"`,
@@ -66,8 +71,8 @@ const addMacrosInComponentFile = <MODE extends string>(
 ) => {
   let output =
     mode == 'folder'
-      ? [...macrosImport(componentName), ...macrosDefines]
-      : [...macrosTypeInComponent, ...macrosDefines];
+      ? [...macrosImport(componentName), ...macrosDefines(componentName)]
+      : [...macrosTypeInComponent, ...macrosDefines(componentName)];
   return output;
 };
 
